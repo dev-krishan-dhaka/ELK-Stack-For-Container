@@ -1,5 +1,4 @@
 version: "3.8"
-
 services:
 
   elasticsearch:
@@ -9,7 +8,7 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=false
       - xpack.security.enrollment.enabled=false
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
     ports:
       - "9200:9200"
     volumes:
@@ -42,8 +41,10 @@ services:
       - "5044:5044"
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/pipeline
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - LS_JAVA_OPTS=-Xms256m -Xmx256m
+    user: root
     networks:
       - elk
     depends_on:

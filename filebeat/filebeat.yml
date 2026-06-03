@@ -2,16 +2,8 @@ filebeat.inputs:
   - type: container
     paths:
       - /var/lib/docker/containers/*/*.log
-    processors:
-      - add_docker_metadata:
-          host: "unix:///var/run/docker.sock"
-
-processors:
-  - drop_fields:
-      fields: ["agent.ephemeral_id", "ecs.version"]
-      ignore_missing: true
 
 output.logstash:
   hosts: ["logstash:5044"]
 
-logging.level: info
+logging.level: error
