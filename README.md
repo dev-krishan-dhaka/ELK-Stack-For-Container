@@ -114,6 +114,23 @@ sudo docker-compose down   # stop
 sudo docker-compose up -d  # start
 ```
 
+## Import Dashboard
+
+After starting the stack, import the pre-built dashboard:
+
+### Option A — Command line
+```bash
+curl -X POST "localhost:5601/api/saved_objects/_import?overwrite=true" \
+  -H "kbn-xsrf: true" \
+  -F file=@kibana/dashboard.ndjson
+```
+
+### Option B — Kibana UI
+1. Go to Stack Management → Saved Objects → Import
+2. Select kibana/dashboard.ndjson
+3. Click Import
+4. Go to Dashboards → Docker logs
+
 ---
 
 ## Troubleshooting
